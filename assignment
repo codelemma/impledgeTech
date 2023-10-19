@@ -1,0 +1,43 @@
+import time
+import sys
+
+def read_file(filename):
+  """Reads the given file and returns a list of words."""
+  with open(filename, "r") as f:
+    return f.read().splitlines()
+
+def find_longest_compound_words(words):
+  """Finds the longest compounded word and the second longest compounded word in the given list of words."""
+  longest_compound_word = ""
+  second_longest_compound_word = ""
+  for word in words:
+    if len(word) > 1:
+      if word.isalpha():
+        longest_compound_word = word
+      else:
+        second_longest_compound_word = word
+  return longest_compound_word, second_longest_compound_word
+
+def main():
+  """The main function."""
+  if len(sys.argv) != 3:
+    print("Usage: python longest_compound_words.py input_01.txt input_02.txt")
+    exit(1)
+
+  input_filename_01 = sys.argv[1]
+  input_filename_02 = sys.argv[2]
+
+  start_time = time.time()
+  words_01 = read_file(input_filename_01)
+  words_02 = read_file(input_filename_02)
+  words = words_01 + words_02
+
+  longest_compound_word, second_longest_compound_word = find_longest_compound_words(words)
+
+  end_time = time.time()
+  print("Longest compounded word:", longest_compound_word)
+  print("Second longest compounded word:", second_longest_compound_word)
+  print("Time taken to process the input files:", end_time - start_time)
+
+if __name__ == "__main__":
+  main()
